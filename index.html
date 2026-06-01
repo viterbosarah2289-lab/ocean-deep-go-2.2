@@ -14,19 +14,19 @@
                 <h1>OCEAN DEEP GO</h1>
                 <p class="tagline">Explore. Remember. Race. Win!</p>
                 <div class="game-levels">
-                    <button class="level-btn" data-level="1">
+                    <button class="level-btn" onclick="showLevel(1)">
                         <span class="level-title">LEVEL 1 - TANI</span>
                         <span class="level-desc">Memory Challenge</span>
                     </button>
-                    <button class="level-btn" data-level="2">
+                    <button class="level-btn" onclick="showLevel(2)">
                         <span class="level-title">LEVEL 2 - NOAM</span>
                         <span class="level-desc">Racing Game</span>
                     </button>
-                    <button class="level-btn" data-level="3">
+                    <button class="level-btn" onclick="showLevel(3)">
                         <span class="level-title">LEVEL 3 - ELYAS</span>
                         <span class="level-desc">Chase Game</span>
                     </button>
-                    <button class="level-btn" data-level="4">
+                    <button class="level-btn" onclick="showLevel(4)">
                         <span class="level-title">LEVEL 4 - DHEER</span>
                         <span class="level-desc">Survival Challenge</span>
                     </button>
@@ -306,7 +306,7 @@
                 <!-- Survival Game -->
                 <div id="survival-game-phase" class="game-phase">
                     <h3>SURVIVE THE NUCLEAR BOMB!</h3>
-                    <p>You have 60 seconds to survive each round.</p>
+                    <p>You have 60 seconds to survive each round. Use ARROW KEYS or WASD to move.</p>
                     
                     <div class="survival-game-area">
                         <canvas id="survival-canvas" width="800" height="400"></canvas>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Deep GO - Multi-Level Adventure</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu Screen -->
+        <div id="menu-screen" class="screen active">
+            <div class="menu-content">
+                <h1>OCEAN DEEP GO</h1>
+                <p class="tagline">Explore. Remember. Race. Win!</p>
+                <div class="game-levels">
+                    <button class="level-btn" data-level="1">
+                        <span class="level-title">LEVEL 1 - TANI</span>
+                        <span class="level-desc">Memory Challenge</span>
+                    </button>
+                    <button class="level-btn" data-level="2">
+                        <span class="level-title">LEVEL 2 - NOAM</span>
+                        <span class="level-desc">Racing Game</span>
+                    </button>
+                    <button class="level-btn" data-level="3">
+                        <span class="level-title">LEVEL 3 - ELYAS</span>
+                        <span class="level-desc">Chase Game</span>
+                    </button>
+                    <button class="level-btn" data-level="4">
+                        <span class="level-title">LEVEL 4 - DHEER</span>
+                        <span class="level-desc">Survival Challenge</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 1: TANI (Memory Game) -->
+        <div id="level1-screen" class="screen">
+            <div class="level-header">
+                <h2>LEVEL 1 - TANI</h2>
+                <p>Memory Challenge</p>
+                <div class="game-info">
+                    <span>Time: <span id="level1-timer">20</span>s</span>
+                    <span>Score: <span id="level1-score">0</span></span>
+                    <span>Round: <span id="level1-round">1</span>/3</span>
+                </div>
+            </div>
+
+            <div id="level1-content" class="level-content">
+                <!-- Fish display phase -->
+                <div id="fish-reveal-phase" class="game-phase active">
+                    <h3>MEET THE 5 FISH</h3>
+                    <p>Look at the fish carefully. Try to remember their names!</p>
+                    <div id="fish-gallery" class="fish-gallery">
+                        <div class="fish-item">
+                            <div class="fish-image clownfish"></div>
+                            <span>CLOWNFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image blue-tang"></div>
+                            <span>BLUE TANG</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image angelfish"></div>
+                            <span>ANGELFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image butterflyfish"></div>
+                            <span>BUTTERFLYFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image lionfish"></div>
+                            <span>LIONFISH</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="gameState.level1.nextPhase()">READY!</button>
+                </div>
+
+                <!-- Cover eyes phase -->
+                <div id="cover-eyes-phase" class="game-phase">
+                    <h3>COVER YOUR EYES</h3>
+                    <div class="eye-icon">👁️</div>
+                    <p>What fish did you see?</p>
+                    <p>Write their names in your mind!</p>
+                </div>
+
+                <!-- Reveal and check phase -->
+                <div id="reveal-check-phase" class="game-phase">
+                    <h3>REVEAL & CHECK</h3>
+                    <p>Did you remember all 5?</p>
+                    <div id="memory-input" class="input-area">
+                        <input type="text" id="fish-names" placeholder="Enter fish names separated by commas">
+                        <button class="btn-primary" onclick="gameState.level1.checkAnswer()">CHECK</button>
+                    </div>
+                    <div id="fish-recall" class="fish-gallery">
+                        <div class="fish-item">
+                            <div class="fish-image clownfish"></div>
+                            <span>CLOWNFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image blue-tang"></div>
+                            <span>BLUE TANG</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image angelfish"></div>
+                            <span>ANGELFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image butterflyfish"></div>
+                            <span>BUTTERFLYFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image lionfish"></div>
+                            <span>LIONFISH</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bonus Round -->
+                <div id="bonus-round-phase" class="game-phase">
+                    <h3>BONUS ROUND!</h3>
+                    <p>Can you spot the new fish?</p>
+                    <div id="bonus-fish-gallery" class="fish-gallery">
+                        <div class="fish-item">
+                            <div class="fish-image clownfish"></div>
+                            <span>CLOWNFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image blue-tang"></div>
+                            <span>BLUE TANG</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image angelfish"></div>
+                            <span>ANGELFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image parrotfish"></div>
+                            <span>⭐ PARROTFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image moorish-idol"></div>
+                            <span>⭐ MOORISH IDOL</span>
+                        </div>
+                    </div>
+                    <p class="bonus-hint">⭐ Extra points for sharp eyes!</p>
+                    <button class="btn-primary" onclick="gameState.level1.nextPhase()">CONTINUE</button>
+                </div>
+            </div>
+
+            <button class="btn-back" onclick="showMenu()">← Back to Menu</button>
+        </div>
+
+        <!-- Level 2: NOAM (Racing Game) -->
+        <div id="level2-screen" class="screen">
+            <div class="level-header">
+                <h2>LEVEL 2 - NOAM</h2>
+                <p>Turtle Adventure Board Game</p>
+                <div class="game-info">
+                    <span>Score: <span id="level2-score">0</span></span>
+                    <span>Round: <span id="level2-round">1</span>/3</span>
+                </div>
+            </div>
+
+            <div id="level2-content" class="level-content">
+                <!-- Turtle Selection -->
+                <div id="turtle-select-phase" class="game-phase active">
+                    <h3>MEET THE 4 TURTLES</h3>
+                    <p>Choose your turtle!</p>
+                    <div id="turtle-gallery" class="turtle-gallery">
+                        <button class="turtle-btn" data-turtle="shelly" onclick="gameState.level2.selectTurtle('shelly')">
+                            <div class="turtle-image shelly"></div>
+                            <span>SHELLY</span>
+                        </button>
+                        <button class="turtle-btn" data-turtle="turbo" onclick="gameState.level2.selectTurtle('turbo')">
+                            <div class="turtle-image turbo"></div>
+                            <span>TURBO</span>
+                        </button>
+                        <button class="turtle-btn" data-turtle="coral" onclick="gameState.level2.selectTurtle('coral')">
+                            <div class="turtle-image coral"></div>
+                            <span>CORAL</span>
+                        </button>
+                        <button class="turtle-btn" data-turtle="wave" onclick="gameState.level2.selectTurtle('wave')">
+                            <div class="turtle-image wave"></div>
+                            <span>WAVE</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Board Game -->
+                <div id="board-game-phase" class="game-phase">
+                    <h3>THE BOARD</h3>
+                    <p>Roll the dice. Move your turtle. First to FINISH wins!</p>
+                    
+                    <div class="board-container">
+                        <canvas id="game-board" width="800" height="500"></canvas>
+                    </div>
+
+                    <div class="board-controls">
+                        <button class="btn-primary" id="roll-dice-btn" onclick="gameState.level2.rollDice()">ROLL DICE</button>
+                        <div id="dice-result" class="dice-result"></div>
+                    </div>
+
+                    <div class="board-info">
+                        <h4>BOARD SPACES:</h4>
+                        <div class="space-info">
+                            <span class="treasure">🏆 TREASURE - Move forward 2 spaces!</span>
+                            <span class="safe">⚪ SAFE - Nothing happens.</span>
+                            <span class="obstacle">🚫 OBSTACLE - Move back 2 spaces!</span>
+                            <span class="surprise">❓ SURPRISE - Follow the card!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-back" onclick="showMenu()">← Back to Menu</button>
+        </div>
+
+        <!-- Level 3: ELYAS (Chase Game) -->
+        <div id="level3-screen" class="screen">
+            <div class="level-header">
+                <h2>LEVEL 3 - ELYAS</h2>
+                <p>Survive the Squid!</p>
+                <div class="game-info">
+                    <span>Lives: <span id="level3-lives">3</span></span>
+                    <span>Score: <span id="level3-score">0</span></span>
+                    <span>Round: <span id="level3-round">1</span>/5</span>
+                </div>
+            </div>
+
+            <div id="level3-content" class="level-content">
+                <!-- Squid Introduction -->
+                <div id="squid-intro-phase" class="game-phase active">
+                    <h3>MEET THE FISH</h3>
+                    <p>Remember them! They will move to new spots!</p>
+                    <div id="fish-intro-gallery" class="fish-gallery">
+                        <div class="fish-item">
+                            <div class="fish-image clownfish"></div>
+                            <span>CLOWNFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image blue-tang"></div>
+                            <span>BLUE TANG</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image angelfish"></div>
+                            <span>ANGELFISH</span>
+                        </div>
+                        <div class="fish-item">
+                            <div class="fish-image butterflyfish"></div>
+                            <span>BUTTERFLYFISH</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="gameState.level3.nextPhase()">READY!</button>
+                </div>
+
+                <!-- Squid Chase Game -->
+                <div id="squid-game-phase" class="game-phase">
+                    <h3>THE SQUID ATTACKS!</h3>
+                    <p>Click the fish to save them before the squid catches them!</p>
+                    <div id="squid-game-area" class="game-area">
+                        <canvas id="squid-canvas" width="800" height="400"></canvas>
+                    </div>
+                    <div class="warning-text">⚠️ HURRY! The squid is getting closer! ⚠️</div>
+                </div>
+
+                <!-- Speed Progression -->
+                <div id="speed-info" class="speed-progression">
+                    <h4>5 ROUNDS OF INCREASING SPEED!</h4>
+                    <div class="speed-levels">
+                        <span class="speed-level">① SLOW</span>
+                        <span class="speed-level">② A BIT FASTER</span>
+                        <span class="speed-level">③ FAST</span>
+                        <span class="speed-level">④ VERY FAST</span>
+                        <span class="speed-level">⑤ EXTREME SPEED!</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-back" onclick="showMenu()">← Back to Menu</button>
+        </div>
+
+        <!-- Level 4: DHEER (Survival Game) -->
+        <div id="level4-screen" class="screen">
+            <div class="level-header">
+                <h2>LEVEL 4 - IMPOSSIBLE</h2>
+                <p>DHEER - Survive the Nuclear Bomb</p>
+                <div class="game-info">
+                    <span>Lives: <span id="level4-lives">3</span></span>
+                    <span>Score: <span id="level4-score">0</span></span>
+                    <span>Round: <span id="level4-round">1</span>/5</span>
+                </div>
+            </div>
+
+            <div id="level4-content" class="level-content">
+                <!-- Introduction -->
+                <div id="dheer-intro-phase" class="game-phase active">
+                    <h3>MEET THE BLOOP</h3>
+                    <p>The Bloop is a giant mysterious creature from the deep. When it surfaces... it releases a NUCLEAR BOMB.</p>
+                    <div class="threat-display">
+                        <div class="bloop-image"></div>
+                        <p class="threat-text">THE BLOOP HAS AWAKENED. IT IS ANGRY. IT WILL DESTROY EVERYTHING.</p>
+                    </div>
+                    <button class="btn-primary" onclick="gameState.level4.startGame()">I'M READY TO SURVIVE</button>
+                </div>
+
+                <!-- Survival Game -->
+                <div id="survival-game-phase" class="game-phase">
+                    <h3>SURVIVE THE NUCLEAR BOMB!</h3>
+                    <p>You have 60 seconds to survive each round.</p>
+                    
+                    <div class="survival-game-area">
+                        <canvas id="survival-canvas" width="800" height="400"></canvas>
+                    </div>
+
+                    <div class="survival-strategies">
+                        <div class="strategy">
+                            <span>🏠 FIND SHELTER</span>
+                            <p>Hide behind rocks, rocks, or underwater structures.</p>
+                        </div>
+                        <div class="strategy">
+                            <span>⚡ COLLECT POWER-UPS</span>
+                            <p>Shield, Speed Boost, Extra Life, Health Pack</p>
+                        </div>
+                        <div class="strategy">
+                            <span>⚠️ AVOID THE DANGERS</span>
+                            <p>Shockwaves, Debris, Radiation Zone</p>
+                        </div>
+                    </div>
+
+                    <div class="threats-list">
+                        <h4>THREATS YOU'LL FACE:</h4>
+                        <div class="threat-item">💣 NUCLEAR BOMB - Instant death if you're in the open!</div>
+                        <div class="threat-item">〰️ SHOCKWAVES - Can push you into dead zones!</div>
+                        <div class="threat-item">☢️ RADIATION ZONE - Drains your health over time!</div>
+                        <div class="threat-item">🌪️ DEBRIS FIELD - Random and unpredictable!</div>
+                    </div>
+                </div>
+
+                <!-- Game Rules -->
+                <div id="rules-phase" class="game-phase">
+                    <h3>RULES & ROUNDS</h3>
+                    <div class="rules-display">
+                        <div class="rule">
+                            <span>Round 1:</span> WARM UP - Easy
+                        </div>
+                        <div class="rule">
+                            <span>Round 2:</span> THE HUNT BEGINS - Harder
+                        </div>
+                        <div class="rule">
+                            <span>Round 3:</span> NO ESCAPE - Insane
+                        </div>
+                        <div class="rule">
+                            <span>Round 4:</span> TOTAL CHAOS - Extreme
+                        </div>
+                        <div class="rule">
+                            <span>Round 5:</span> FINAL DOOM - Impossible
+                        </div>
+                    </div>
+                    <p class="victory-text">⚠️ YOU LOSE IF YOU DIE! SURVIVE ALL 5 ROUNDS TO WIN!</p>
+                </div>
+            </div>
+
+            <button class="btn-back" onclick="showMenu()">← Back to Menu</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="screen">
+            <div class="gameover-content">
+                <h2 id="gameover-title">GAME OVER</h2>
+                <div id="gameover-stats" class="stats">
+                    <p>Score: <span id="final-score">0</span></p>
+                    <p>Level Reached: <span id="final-level">1</span></p>
+                </div>
+                <button class="btn-primary" onclick="showMenu()">← Back to Menu</button>
+                <button class="btn-secondary" onclick="location.reload()">Refresh Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
